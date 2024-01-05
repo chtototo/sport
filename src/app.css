@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply text-[10px] leading-5 not-italic font-main flex justify-center
+}
+
+::-webkit-scrollbar {
+    @apply hidden
+}
