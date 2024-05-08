@@ -2,12 +2,20 @@
 import { RouterLink, RouterView } from "vue-router";
 
 const share = () => {
-  navigator.share({
-      title: 'Мой сайт',
-      text: 'Проверьте это!',
-      url: window.location.href,
-    })
-}
+  if (navigator.share) {
+    navigator
+      .share({
+        title: "Мой сайт",
+        text: "Проверьте это!",
+        url: window.location.href,
+      })
+      .catch((error) => {
+        alert('Ошибка при открытии меню "Поделиться":');
+      });
+  } else {
+    alert('Функция "navigator.share" не поддерживается на этом устройстве.');
+  }
+};
 </script>
 
 <template>
@@ -106,7 +114,12 @@ const share = () => {
       <div class="lg:w-[100%] relative">
         <div class="flex w-full items-center justify-center mt-[50px]">
           <div class="w-fit text-black">
-            <img onclick="share" class="hover:opacity-[.8] cursor-pointer" src="./components/share.png" alt="">
+            <img
+              @click="share"
+              class="hover:opacity-[.8] cursor-pointer"
+              src="./components/share.png"
+              alt=""
+            />
           </div>
         </div>
         <div class="w-[100%] relative lg:px-[8px] box-border block">
